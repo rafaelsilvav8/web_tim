@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'firebase_options.dart';
+import 'package:flutter/semantics.dart';
 
 
 void main() async {
@@ -10,6 +11,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
+  SemanticsBinding.instance.ensureSemantics();
 }
 
 class MyApp extends StatelessWidget {
@@ -33,38 +35,20 @@ class MyHomePage extends StatelessWidget {
 
   MyHomePage({required this.analytics});
 
-  Future<void> _sendAnalyticsEvent() async {
+  Future<void> _sendAnalyticsEvent(String event, String elemnt) async {
     await analytics.logEvent(
-      name: 'test_event',
+      name: event,
       parameters: <String, Object>{
-        'string': 'flutter',
-        'int': 42,
-        'long': 12345678910,
-        'double': 42.0,
+        'click': elemnt,
+        'timestamp': DateTime.now().toUtc().toString(),
+        'platform': 'web',
+        'language': 'pt-BR',
+        'app_version': '1.0.0',
+        'os_version': '10.0.0',        
       },
     );
   }
 
-
-  void _showAlertDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Atenção"),
-          content: Text("Este é um alerta no Flutter Web!"),
-          actions: <Widget>[
-            TextButton(
-              child: Text("Fechar"),
-              onPressed: () {
-                Navigator.of(context).pop(); // Fecha o alerta
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +56,10 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(title: Text("Alerta no Flutter Web")),
       body: Center(
         child: ElevatedButton(
-          child: Text("Log event"),
-          onPressed: _sendAnalyticsEvent         
+          child: Semantics(child: const Text("Log event")),
+          onPressed: () {
+                _sendAnalyticsEvent("click_btn_alert", "button_alerta_flutter_web");
+          },         
         ),
       ),
     );
