@@ -39,17 +39,16 @@
 </head>
 
 <body>
-  <!-- Medallia DXA - Testes V8 Tech -->
-  <script type="text/javascript">
-    // <![CDATA[
-    (function (d, e, c, i, b, el, it) {
-      d._da_ = d._da_ || []; _da_.oldErr = d.onerror; _da_.err = [];
-      d.onerror = function () { _da_.err.push(arguments); _da_.oldErr && _da_.oldErr.apply(d, Array.prototype.slice.call(arguments)); };
-      d.DecibelInsight = b; d[b] = d[b] || function () { (d[b].q = d[b].q || []).push(arguments); };
-      el = e.createElement(c), it = e.getElementsByTagName(c)[0]; el.async = 1; el.src = i; it.parentNode.insertBefore(el, it);
-    })(window, document, 'script', 'https://cdn.decibelinsight.net/i/14201/2487866/di.js', 'decibelInsight');
-    // ]]>
-  </script>
+
+  <!-- Amplitude -->
+  <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz">  </script>
+  <script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.8.0-min.js.gz">  </script>
+  
+
+  <script src="inspectlet.js"></script>
+  <script src="amplitude.js"></script>
+  <script src="medallia.js"></script>
+  <script src="sessionrewind.js"></script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
