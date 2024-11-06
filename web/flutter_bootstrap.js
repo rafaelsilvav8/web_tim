@@ -4,7 +4,7 @@
 const useCanvasKit = true;
 
 const config = {
-  renderer: useCanvasKit ? "canvaskit" : "skwasm",
+  renderer: useCanvasKit ? "canvaskit" : "html",
 };
 _flutter.loader.load({
   config: config,

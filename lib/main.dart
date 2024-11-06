@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:js' as js;
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
   SemanticsBinding.instance.ensureSemantics();
 }
@@ -33,18 +37,16 @@ class MyHomePage extends StatelessWidget {
                 labelText: 'Digite algo',
               ),
               onSubmitted: (text) {
-                // ignore: avoid_print
-                print('Texto digitado: $text');
+                createTextBoxAndChange(
+                    "textbox_01", "text_field_submitted", text);
               },
             ),
-            const SizedBox(
-                height: 20), // Espaçamento entre o TextField e o botão
+            const SizedBox(height: 20),
             ElevatedButton(
               key: const Key("btn_01"),
-              child: Semantics(child: const Text("Log event")),
+              child: const Text("Log event"),
               onPressed: () {
-                // ignore: avoid_print
-                print('Botão pressionado');
+                createButtonAndClick("btn_01", "flutter_button_clicked", "22");
               },
             ),
           ],
@@ -52,4 +54,16 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+void createButtonAndClick(String buttonId, String eventName, String value) {
+  js.context
+      .callMethod('decibelInsight', ['sendTrackedEvent', eventName, value]);
+  js.context.callMethod('CustomAlert', ['Button $buttonId clicked']);
+}
+
+void createTextBoxAndChange(String inputId, String eventName, String newValue) {
+  js.context
+      .callMethod('decibelInsight', ['sendTrackedEvent', eventName, newValue]);
+  js.context.callMethod('CustomAlert', ['Textbox $inputId changed value to $newValue']);
 }
