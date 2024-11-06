@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
-// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 
 Future<void> main() async {
@@ -34,19 +32,18 @@ class MyHomePage extends StatelessWidget {
               key: const Key("textbox_01"),
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Digite algo',
+                labelText: 'Teste digite algo',
               ),
               onSubmitted: (text) {
-                createTextBoxAndChange(
-                    "textbox_01", "text_field_submitted", text);
+                createTextBoxAndChange("textbox_01", "text_field_submitted", "01");
               },
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               key: const Key("btn_01"),
-              child: const Text("Log event"),
+              child: const Text("Teste clique"),
               onPressed: () {
-                createButtonAndClick("btn_01", "flutter_button_clicked", "22");
+                createButtonAndClick("btn_01", "flutter_button_clicked", "02");
               },
             ),
           ],
@@ -57,13 +54,9 @@ class MyHomePage extends StatelessWidget {
 }
 
 void createButtonAndClick(String buttonId, String eventName, String value) {
-  js.context
-      .callMethod('decibelInsight', ['sendTrackedEvent', eventName, value]);
-  js.context.callMethod('CustomAlert', ['Button $buttonId clicked']);
+  js.context.callMethod('decibelInsight', ['sendTrackedEvent', eventName, value]);  
 }
 
 void createTextBoxAndChange(String inputId, String eventName, String newValue) {
-  js.context
-      .callMethod('decibelInsight', ['sendTrackedEvent', eventName, newValue]);
-  js.context.callMethod('CustomAlert', ['Textbox $inputId changed value to $newValue']);
+  js.context.callMethod('decibelInsight', ['sendTrackedEvent', eventName, newValue]);
 }

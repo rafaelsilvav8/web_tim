@@ -732,7 +732,7 @@ var $async$Ho=A.Q(function(b,c){if(b===1)return A.M(c,r)
 while(true)switch(s){case 0:n={}
 l=t.fF
 s=3
-return A.R(A.ny(a.q0("FontManifest.json")),$async$Ho)
+return A.R(A.ny(a.q0("assets/FontManifest.json")),$async$Ho)
 case 3:m=l.a(c)
 if(!m.guM()){$.cz().$1("Font manifest does not exist at `"+m.a+"` - ignoring.")
 q=new A.pc(A.a([],t.vt))
